@@ -1,0 +1,6 @@
+https://flatlist.ppare.ch {
+    root * /var/www/flatlist/frontend/dist
+    file_server
+
+    try_files {path} /index.html
+}
