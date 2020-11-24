@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/auth',
+    path: '/login',
     component: () => import('@/containers/Main'),
     meta: {
       title: "Flatlist",
@@ -17,8 +17,17 @@ const routes = [
         name: 'Login',
         component: () => import('@/views/Login'),
       },
+    ]
+  },
+  {
+    path: '/register',
+    component: () => import('@/containers/Main'),
+    meta: {
+      title: "Flatlist",
+    },
+    children: [
       {
-        path: 'register',
+        path: '',
         name: 'Register',
         component: () => import('@/views/Register'),
       },

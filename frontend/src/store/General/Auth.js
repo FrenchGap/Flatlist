@@ -31,16 +31,17 @@ export const Auth = {
 
   getters: {
     async checkAuthenticated() {
-      if (store.state.Auth.token || localStorage.getItem('token')) {
+      if (store.state.Auth.token || localStorage.getItem('t')) {
         let params = {
-          'api_token': store.state.Auth.token ? store.state.Auth.token : localStorage.getItem('token'),
+          'api_token': store.state.Auth.token ? store.state.Auth.token : localStorage.getItem('t'),
         };
         let resultingState = await Axios.get(process.env.VUE_APP_API_URL + '/checktoken', {
           params: params
         })
-        .then((response) => {
-          store.dispatch('User/setUser', response.data.user);
-          store.dispatch('Auth/setToken', response.data.token);
+        .then(async(response) => {
+          await store.dispatch('User/setUser', response.data.user);
+          await store.dispatch('Auth/setToken', response.data.token);
+          await store.dispatch('Auth/setAuthenticated');
           return true;
         })
         .catch(() => {

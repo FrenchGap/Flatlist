@@ -4,7 +4,6 @@
       absolute
       dark
       color="transparent"
-      clipped-left
       flat
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -32,9 +31,9 @@
     </v-app-bar>
     <v-navigation-drawer
       app
-      clipped
       v-model="drawer"
       dark
+      temporary
     >
 
     </v-navigation-drawer>
