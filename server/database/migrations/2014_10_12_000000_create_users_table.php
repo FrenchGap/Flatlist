@@ -17,10 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
-            $table->string('email')->unique();
-            $table->string('password');
             $table->boolean('approved')->default(false);
             $table->boolean('admin')->default(false);
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('api_token', 80)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

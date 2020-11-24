@@ -18,10 +18,11 @@ class User extends Authenticatable
     protected $fillable = [
         'fname',
         'lname',
-        'email',
-        'password',
         'approved',
         'admin',
+        'email',
+        'password',
+        'api_token',
     ];
 
     /**
@@ -30,6 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'api_token',
         'password',
         'remember_token',
     ];
