@@ -31,7 +31,9 @@ export const Auth = {
 
   getters: {
     async checkAuthenticated() {
-      if (store.state.Auth.token || localStorage.getItem('t')) {
+      if (store.state.Auth.authenticated) {
+        return true;
+      } else if (store.state.Auth.token || localStorage.getItem('t')) {
         let params = {
           'api_token': store.state.Auth.token ? store.state.Auth.token : localStorage.getItem('t'),
         };

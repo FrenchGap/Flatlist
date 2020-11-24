@@ -6,6 +6,7 @@ export const User = {
     fname: null,
     lname: null,
     email: null,
+    admin: null,
   },
 
   mutations: {
@@ -14,6 +15,11 @@ export const User = {
       state.fname = user['fname'];
       state.lname = user['lname'];
       state.email = user['email'];
+      if (user['admin']) {
+        state.admin = true;
+      } else {
+        state.admin = false;
+      }
     },
 
     DEL_USER(state) {
@@ -21,6 +27,7 @@ export const User = {
       state.fname = null;
       state.lname = null;
       state.email = null;
+      state.admin = null;
     }
   },
 

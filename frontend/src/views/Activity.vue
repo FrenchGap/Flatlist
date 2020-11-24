@@ -1,14 +1,15 @@
 <template>
-  <ListTable />
+  <ActivityFeed />
 </template>
 
 <script>
-import ListTable from '../components/Modules/ListTable.vue'
+import ActivityFeed from '../components/Modules/ActivityFeed.vue'
 export default {
   components: {
-    ListTable
+    ActivityFeed
+
   },
-  name: "Dashboard",
+  name: "Activity",
   data() {
     return {
 

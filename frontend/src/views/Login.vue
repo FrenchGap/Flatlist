@@ -103,6 +103,7 @@ export default {
         this.$store.dispatch('Auth/setAuthenticated');
         this.$store.dispatch('Auth/setToken', response.data.token);
         this.$store.dispatch('User/setUser', response.data.user);
+        console.log(response.data.user)
         return true;
       })
       .catch(() => {

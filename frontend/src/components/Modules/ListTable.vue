@@ -10,33 +10,28 @@
       <span>Available Lists</span>
     </v-system-bar>
     <v-card-text>
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in listItems"
-            :key="item.id"
-          >
-            <td>{{item.name}}</td>
-            <td>{{item.description}}</td>
-            <td>
-              <v-btn
-                icon
-                outlined
-                color="primary"
-              >
-                <v-icon>mdi-magnify</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </v-simple-table>
+      <v-list two-line dense>
+        <v-list-item
+          v-for="item in listItems"
+          :key="item.id"
+          :to="{ name: 'List', params: { id: item.id } }"
+        >
+          <v-list-item-avatar>
+            <v-icon dark class="black">mdi-silverware-fork-knife</v-icon>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.name"></v-list-item-title>
+            <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn
+              icon
+            >
+
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
     </v-card-text>
   </v-card>
 </template>

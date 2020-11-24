@@ -10,6 +10,7 @@ const routes = [
     component: () => import('@/containers/Main'),
     meta: {
       title: "Flatlist",
+      requireUnauthenticated: true
     },
     children: [
       {
@@ -24,6 +25,7 @@ const routes = [
     component: () => import('@/containers/Main'),
     meta: {
       title: "Flatlist",
+      requireUnauthenticated: true
     },
     children: [
       {
@@ -47,9 +49,27 @@ const routes = [
         component: () => import('@/views/Dashboard'),
       },
       {
+        path: 'activity',
+        name: 'Activity',
+        component: () => import('@/views/Activity'),
+      },
+      {
+        path: 'members',
+        name: 'Members',
+        component: () => import('@/views/Dashboard'),
+      },
+      {
         path: '/admin',
         name: 'Admin',
+        meta: {
+          requireAdmin: true
+        },
         component: () => import('@/views/Admin'),
+      },
+      {
+        path: '/list/:id',
+        name: 'List',
+        component: () => import('@/views/ListView'),
       },
       {
         path: '/logout',
@@ -79,6 +99,12 @@ router.beforeEach(async(to, from, next) => {
   const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
   if(nearestWithTitle) document.title = nearestWithTitle.meta.title;
 
+  // Redirect out of login and register routes
+  const requireUnauthenticated = to.matched.some(record => record.meta.requireUnauthenticated);
+  if (requireUnauthenticated && store.state.Auth.authenticated) {
+      return next ({ name: 'Home' });
+  }
+
   // Authenticated Middleware
   const requireAuthenticated = to.matched.some(record => record.meta.requireAuthenticated);
   if (requireAuthenticated && store.state.Auth.authenticated == false) {
@@ -88,6 +114,16 @@ router.beforeEach(async(to, from, next) => {
         return next({ name: 'Login' })
       }
     });
+  }
+
+  // Admin middleware
+  const requireAdmin = to.matched.some(record => record.meta.requireAdmin);
+  if (requireAdmin && !store.state.User.admin) {
+    if (from.name) {
+      return next({ name: from.name });
+    } else {
+      return next ({ name: 'Home' });
+    }
   }
 
   next();
